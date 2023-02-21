@@ -1,0 +1,5 @@
+// this is a test to show my skills on commenting. Also using git commands
+
+
+/* This is how you start a comment in you visual studios application. 
+*/ This is how you end the line comments

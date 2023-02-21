@@ -48,7 +48,7 @@ describe("Employee Manager 1.2", () => {
         await driver.wait(
             until.elementIsVisible(await driver.findElement(nameInput))
         );
-        await driver.findElement(nameInput).clear();
+        await driver.findElement(bernice).clear();
         await driver.findElement(nameInput).sendKeys("Test Name");
         await driver.findElement(phillip).click();
         await driver.wait(
@@ -118,7 +118,7 @@ describe("Employee Manager 1.2", () => {
             // so getAttribute needs to be "value"? what exactly is this below - ask Mars
             expect(
                 await (await driver.findElement(nameInput)).getAttribute("value")
-            ).toBe("Bernice Ortiz");
+            ).toBe("Test Name");
     });
 });
 

@@ -27,6 +27,6 @@
     "@types/selenium-webdriver": "^4.1.11",
     "chromedriver": "^110.0.0",
     "geckodriver": "^3.2.0",
-    "selenium-webdriver": "^4.8.0"
+    "selenium-webdriver": "^4.8.1"
   }
 }

@@ -2,7 +2,7 @@ import{ Builder, By, Capabilities, WebDriver, until} from 'selenium-webdriver'
 const chromedriver = require("chromedriver")
 const driver: WebDriver = new Builder().withCapabilities(Capabilities.chrome()).build()
 
-test('promise chaining') , () => {
+test('promise chaining' , () => {
     return driver.get("https://www.google.com")
     .then(() => {
         return driver.wait(until.elementLocated(By.name('q')))
@@ -14,11 +14,11 @@ test('promise chaining') , () => {
     return driver.findElement(By.id('rso')).getText()
 })
 .then((value) => {
-expect (value.toLowerCase()).toContain("Puppies")
+expect(value).toContain("Puppies")
 })
-.catch ((e) =>{
+.catch((e) => {
     console.log(e)
     expect(false).toBeTruthy()
-    return driver.quit()
+    return driver.quit
 })
 })

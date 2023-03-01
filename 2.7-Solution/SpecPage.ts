@@ -16,13 +16,13 @@ export class SpecPage {
   }
 
   async sendKeys(elemenyBy: By, keys) {
-    await this.driver.wait(until.elementLocated(elemenyBy))
+    await this.driver.wait(until.elementLocated(this.searchBar))
     return this.driver.findElement(elemenyBy).sendKeys(keys)
   }
 
   async getText(elementBy: By) {
     await this.driver.wait(until.elementsLocated(elementBy))
-    return (await this.driver.findElement(elementBy)).getText
+    return (await this.driver.findElement(elementBy)).getText()
   }
 async doSearch(text: string){
     return this.sendKeys(this.searchBar, `${text}\n`)

@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "8a370c8a-f9f7-42a6-a762-62bca962dcb7",
+		"name": "EmployeeManager Queries",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26132459"
+	},
+	"item": [
+		{
+			"name": "2.10HW: EmployeeManager",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://devmountain-qa.github.io/employee-manager/1.2_Version/index.html",
+					"protocol": "https",
+					"host": [
+						"devmountain-qa",
+						"github",
+						"io"
+					],
+					"path": [
+						"employee-manager",
+						"1.2_Version",
+						"index.html"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.1HW: AmazonSearch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.amazon.com/s?k=easter+basket+stuffers&crid=2KQ5QI8U845FM&sprefix=%2Caps%2C285&ref=nb_sb_ss_sx-trend-t-ps-d_10_0",
+					"protocol": "https",
+					"host": [
+						"www",
+						"amazon",
+						"com"
+					],
+					"path": [
+						"s"
+					],
+					"query": [
+						{
+							"key": "k",
+							"value": "easter+basket+stuffers"
+						},
+						{
+							"key": "crid",
+							"value": "2KQ5QI8U845FM"
+						},
+						{
+							"key": "sprefix",
+							"value": "%2Caps%2C285"
+						},
+						{
+							"key": "ref",
+							"value": "nb_sb_ss_sx-trend-t-ps-d_10_0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

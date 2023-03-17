@@ -1,27 +1,20 @@
-import { McCormickPage } from "./pageObjects";
+import {McCormickPage} from './pageObjects'
 import { until } from "selenium-webdriver";
+const page = new McCormickPage()
+const fs = require('fs')
 
-describe("Accessing McCormick website and screenshot a recipe", () => {
-  let page: McCormickPage;
-
-  beforeAll(async () => {
-    const page = new McCormickPage();
-    await page.navigate();
+  test("should navigate to McCormick website and screenshot a recipe", async () => {
+    await page.navigate("https://www.mccormick.com")
     await page.driver.manage().window().maximize();
-  });
-
-  /*afterAll(async () => {
-    await page.driver.quit();
-  });*/
-
-  it("should navigate to McCormick website and screenshot a recipe", async () => {
+    await page.driver.sleep(3000)
     await page.click(page.recipeTab);
     await page.click(page.stPattyTab);
-    await page.click(page.irishCoffeeTab);
-    await page.driver.wait(until.elementLocated(page.viewRecipeOnlyTab));
-    await page.click(page.viewRecipeOnlyTab);
-    await page.driver.sleep(1000);
+    await page.driver.sleep(3000)
+    await fs.writeFile(`${__dirname}/IrishCoffee.png`, 
+    await page.driver.takeScreenshot(), "base64", 
+    (e) => {
+        if (e) console.error(e)
+        else console.log('Save Successful')
+    })
+    await page.driver.quit()
   });
-});
-
-

@@ -1,41 +1,51 @@
-import { Builder, Capabilities, By, WebDriver, WebElement } from 'selenium-webdriver';
+import {Builder, By, Capabilities, until, WebDriver, WebElement} from 'selenium-webdriver'
+import { tsImportEqualsDeclaration } from '@babel/types'
+import { timingSafeEqual } from 'crypto'
+const chromedriver = require('chromedriver')
+
 interface Options {
-  driver?: WebDriver;
-  url?: string; 
-  url1?: string;
- 
+    driver?: WebDriver;
+    url?: string; 
 }
+
 export class BasePage {
-  driver: WebDriver;
-  url: string;
+    driver: WebDriver
+    url: string
 
-  constructor(options?: Options) {
-    if (options && options.driver) this.driver = options.driver;
-    else
-    this.driver = new Builder().withCapabilities(Capabilities.chrome()).build()
-    if(options && options.url) this.url = options.url
-  }
-  async navigateTo(): Promise<void> {
-    await this.driver.get(this.url);
-  }
+    constructor(options?: Options) {
+        if(options && options.driver) this.driver = options.driver
+        else this.driver = new Builder().withCapabilities(Capabilities.chrome()).build()
+        if(options && options.url) this.url = options.url
+    }
+    
+    async navigate(url?: string): Promise<void> {
+        if (url) return await this.driver.get(url)
+        else if (this.url) return await this.driver.get(this.url)
+        else return Promise.reject('You need a url to test the page please add one in your page objects')
+    }
 
-  async findElement(locator: By): Promise<WebElement> {
-    return await this.driver.findElement(locator);
-  }
+    async getElement(elementBy: By): Promise<WebElement> {
+        await this.driver.wait(until.elementLocated(elementBy))
+        let element = await this.driver.findElement(elementBy)
+        await this.driver.wait(until.elementIsVisible(element))
+        return element 
+    }
 
-  async clickElement(locator: By): Promise<void> {
-    const element = await this.findElement(locator);
-    await element.click();
-  }
+    async click(elementBy: By): Promise<void> {
+        return(await this.getElement(elementBy)).click()
+    }
 
-  async sendKeys(locator: By, keys: string): Promise<void> {
-    const element = await this.findElement(locator);
-    await element.sendKeys(keys);
-  }
+    async setInput(elementBy: By, keys: any ): Promise<void> {
+        let input = await this.getElement(elementBy)
+        await input.clear()
+        return input.sendKeys(keys)
+    }
 
-  async takeScreenshot(filename: string): Promise<void> {
-    await this.driver.takeScreenshot().then((data: string) => {
-      require('fs').writeFileSync(filename, data, 'base64');
-    });
-  }
+    async getText(elementBy: By): Promise<string> {
+        return (await this.getElement(elementBy)).getText()
+    }
+
+    async getAttribute(elementBy: By, attribute: string) {
+        return (await this.getElement(elementBy)).getAttribute(attribute)
+    }
 }

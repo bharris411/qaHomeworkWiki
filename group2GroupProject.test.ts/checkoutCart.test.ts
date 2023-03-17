@@ -1,22 +1,18 @@
 import { McCormickPage } from "./pageObjects";
-import { Builder, until } from "selenium-webdriver";
+import { until } from "selenium-webdriver";
+const page = new McCormickPage
+const fs = require ('fs')
 
-describe('McCormick website', () => {
-  let page: McCormickPage;
-
-  beforeAll(async () => {
-    const page = new McCormickPage();
-    await page.navigate();
-    await page.driver.manage().window().maximize();
+  test('should navigate to McCormick checkout icon', async () => {
+    await page.navigate("https://www.mccormick.com")
+    await page.driver.manage().window().maximize
+    await page.driver.sleep(3000)
+    await page.click(page.checkoutCart)
+    await fs.writeFile(`${__dirname}/CheckoutCart.png`, 
+    await page.driver.takeScreenshot(), "base64", 
+    (e) => {
+        if (e) console.error(e)
+        else console.log('Save Successful')
+    })
+    await page.driver.quit()
   });
-
-  afterAll(async () => {
-    await McCormickPage.driver.quit();
-  });
-
-  test('should navigate to McCormick website, click checkout button, and take a screenshot', async () => {
-    await page.navigate();
-    await page.clickCheckoutButton();
-    const screenshot = await McCormickPage.driver.takeScreenshot();
-  });
-});
